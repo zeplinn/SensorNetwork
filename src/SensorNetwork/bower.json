@@ -1,9 +1,9 @@
 {
-  "name": "ASP.NET",
-  "private": true,
+	"name": "ASP.NET",
+	"private": true,
   "dependencies": {
-    "fotorama": "4.6.4",
-    "jQuery": "~2.2.2",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.2.2"
+
   }
 }

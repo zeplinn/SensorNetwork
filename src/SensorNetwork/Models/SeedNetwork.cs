@@ -1,4 +1,5 @@
 ﻿using SensorNetwork.Models.DbContexts;
+using SensorNetwork.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +26,7 @@ namespace SensorNetwork.Models
                 {
                     var network = new Network()
                     {
-                        NetworkId = item,
+                        //NetworkId = int.Parse( $"{item}"),
                         Host = $"localhost{item}",
                         NetworkName = $"Network{item}",
                         Password = $"xxxx{item}",
@@ -52,7 +53,6 @@ namespace SensorNetwork.Models
 
             }
         }
-        private int sensorInc = 0;
         private IEnumerable<Reading> EnsureReadingSeed()
         {
             int min = 0;
@@ -62,7 +62,6 @@ namespace SensorNetwork.Models
                 var DateTime = new DateTime(2016, 3, 1, 0, 0, 0, 0);
                 yield return new Reading()
                 {
-                    ReadingID=sensorInc++,
                     Time = DateTime.AddMinutes(min),
                     Value = Rng.Next(5, 30)
                 };

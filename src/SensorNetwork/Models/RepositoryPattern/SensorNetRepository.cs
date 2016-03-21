@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Entity;
 using SensorNetwork.Models.DbContexts;
+using SensorNetwork.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

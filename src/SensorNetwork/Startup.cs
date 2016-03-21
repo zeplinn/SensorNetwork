@@ -17,7 +17,7 @@ namespace SensorNetwork
 {
     public class Startup
     {
-        private IConfigurationRoot _builder;
+        public static IConfigurationRoot _builder;
         public Startup(IApplicationEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -30,7 +30,7 @@ namespace SensorNetwork
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInstance<IConfigurationRoot>(_builder);
+            //services.AddInstance<IConfigurationRoot>(_builder);
             services.AddMvc();
             services.AddEntityFramework()
                 .AddNpgsql()

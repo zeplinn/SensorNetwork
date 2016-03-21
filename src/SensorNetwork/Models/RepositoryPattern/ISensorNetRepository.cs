@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SensorNetwork.Models.Entities;
+using System.Collections.Generic;
 
 namespace SensorNetwork.Models.RepositoryPattern
 {

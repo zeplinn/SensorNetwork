@@ -1,4 +1,5 @@
 ﻿using SensorNetwork.Models;
+using SensorNetwork.Models.Entities;
 using SensorNetwork.Models.RepositoryPattern;
 using System;
 using System.Collections;
