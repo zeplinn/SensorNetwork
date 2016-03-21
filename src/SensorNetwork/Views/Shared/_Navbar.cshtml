@@ -1,0 +1,48 @@
+﻿@using SensorNetwork.Controllers.App;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/lib/jQuery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header class="navbar">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand"
+                       asp-controller="app"
+                       asp-action="home">
+                    SensorNetwork
+                    </a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a 
+                               asp-controller="app"
+                               asp-action="settings">
+                            Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+    </header>
+    @*<h1>@AppController.C;</h1>*@
+    <div>
+        @RenderBody()
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    
+    @*Allow for local page script imports*@
+    @RenderSection("Scrips", false);
+</body>
+</html>

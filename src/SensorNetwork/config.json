@@ -1,0 +1,7 @@
+﻿{
+  "Data": {
+    "DbConnect": "Host=localhost;Database=opc;Username=postgres;Password=Z110144ucc",
+    "DbConnectDebug": "Host=localhost;Database=Debug;Username=postgres;Password=Z110144ucc"
+  }
+
+}
