@@ -1,5 +1,7 @@
-﻿using SensorNetwork.Models.Entities;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using SensorNetwork.Models.Entities;
 
 namespace SensorNetwork.Models.RepositoryPattern
 {
@@ -7,6 +9,9 @@ namespace SensorNetwork.Models.RepositoryPattern
     {
         IEnumerable<Network> GetAllNetWork();
         IEnumerable<Network> GetAllNetworksWithSensors();
-        IEnumerable<int> SensorData(Network n, Sensor s);
+        IEnumerable<TResult> GetAllNetworksWithSensors<TResult>(Expression<Func<Network, Sensor, TResult>> resultSelector);
+        IEnumerable<Reading> GetReadings(Sensor sensor);
+        IEnumerable<TResult> GetReadings<TResult>(Sensor sensor, Expression<Func<Reading, TResult>> select);
+        int ReadingsCount();
     }
 }

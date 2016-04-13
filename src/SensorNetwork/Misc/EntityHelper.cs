@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace SensorNetwork.Misc
 {
+    //this class is not currently being used
     public class EntityHelper
     {
         private static readonly EntityHelper _self = new EntityHelper();

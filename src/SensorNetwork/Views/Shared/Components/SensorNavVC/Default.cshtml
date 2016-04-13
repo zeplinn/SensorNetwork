@@ -1,0 +1,11 @@
+﻿@*
+    --------SensorNavVC
+
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model SensorNetwork.Views.Shared.Components.SensorNavVC.SensorNavVCModel
+@{
+}
+<p class="btn sidebar-element" data-panelid="@Model.Sensor.SensorId" data-networkid="@Model.NetworkId">
+    @Model.Sensor.Tag
+</p>

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Include Required Prerequisites -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+</head>
+<body>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datepicker').daterangepicker({
+                "showISOWeekNumbers": true,
+                "timePicker24Hour": true,
+                "timePickerIncrement": 30,
+                "autoApply": true,
+                "linkedCalendars": false,
+                "alwaysShowCalendars": true,
+                "parentEl": "datepicker",
+                "startDate": "03/30/2016",
+                "endDate": "04/05/2016",
+                "drops": "down"
+            }, function (start, end, label) {
+                console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        .series
+        {
+            padding-left:0px;
+            border:1px solid transparent;
+            border-color:black;
+            border-radius:4px;
+            height:62px;
+            
+        }
+        
+        .series-item {
+            display:inline-block;
+            padding: 10px 10px 10px 2px;
+            float: left;
+            height:60px;
+            vertical-align:middle;
+        }
+
+        div.series-item input {
+            height: 40px;
+            
+        }
+        .series-item.active{
+            z-index:-2;
+            background:#5d5dff; 
+            padding-left:15px;
+            padding-right:15px;           
+        }
+        .num-4{
+            width:40px;
+            text-align:center
+        }
+        
+    </style>
+    <div class="row">
+        <div class="col-md-3 col-xs-offset-1">
+            <div class="col-sm-10 series">
+                <div class="series-item active">
+                    <h4 >Y-axis </h4>
+                </div>
+                <div class="series-item">
+                    <input class="num-4" type="text"/>
+                    :
+                    <input  class="num-4" type="text"/>
+                </div>
+                <div class="series-item active">
+                    <h4>X-axis </h4>
+                </div>
+                <div class="series-item">
+                    <input class="btn" type="button" id="datepicker" />
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

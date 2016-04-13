@@ -22,7 +22,7 @@ namespace SensorNetwork.Models
             if (!_snc.Networks.Any())
             {
 
-                for(int item=1; item<6;item++)
+                for (int item = 1; item < 6; item++)
                 {
                     var network = new Network()
                     {
@@ -37,18 +37,19 @@ namespace SensorNetwork.Models
                 _snc.SaveChanges();
             }
         }
-        
+
         private IEnumerable<Sensor> EnsureSensorSeed()
         {
             for (int i = 0; i < 3; i++)
             {
-                yield return new Sensor()
+                var s = new Sensor()
                 {
                     Tag = Enum.GetName(typeof(ESensor), i),
                     SensorType = (ESensor)i,
-                    IP = 19216850+i,
-                    Readings = new List<Reading>(EnsureReadingSeed())
+                    IP = 19216850 + i
                 };
+                s.Readings = new List<Reading>(EnsureReadingSeed());
+                yield return s;
 
 
             }
@@ -56,9 +57,9 @@ namespace SensorNetwork.Models
         private IEnumerable<Reading> EnsureReadingSeed()
         {
             int min = 0;
-            for (int i = 0; i < Rng.Next(30,70); i++)
+            for (int i = 0; i < Rng.Next(30, 70); i++)
             {
-                
+
                 var DateTime = new DateTime(2016, 3, 1, 0, 0, 0, 0);
                 yield return new Reading()
                 {
@@ -75,5 +76,5 @@ namespace SensorNetwork.Models
 }
 
 
-    
+
 

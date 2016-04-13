@@ -1,0 +1,23 @@
+{
+  "name": "jquery-ui-slider",
+  "author": "Arun Scaria",
+  "email": "arunscaria91@gmail.com",
+  "main": [
+    "jquery-ui.js",
+    "jquery-ui.css"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "jquery": ">=1.6"
+  },
+  "homepage": "https://github.com/scaria/jquery-ui-slider-1.11.4",
+  "_release": "365c54647b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "365c54647b2396314d1fb878ec9b41ea15363746"
+  },
+  "_source": "https://github.com/scaria/jquery-ui-slider-1.11.4.git",
+  "_target": "*",
+  "_originalSource": "jquery-ui-slider"
+}

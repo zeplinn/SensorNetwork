@@ -12,6 +12,7 @@ using SensorNetwork.Controllers.App;
 using SensorNetwork.Models.DbContexts;
 using SensorNetwork.Models.RepositoryPattern;
 using SensorNetwork.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace SensorNetwork
 {
@@ -31,7 +32,11 @@ namespace SensorNetwork
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddInstance<IConfigurationRoot>(_builder);
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(opt=> {
+                    // deals with javascript lowercase and c# uppercase property conventions when posting
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
             services.AddEntityFramework()
                 .AddNpgsql()
                 .AddDbContext<SensorNetContext>();

@@ -5,8 +5,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <script src="~/lib/jQuery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/BootstrapExtension.css" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -29,6 +29,12 @@
                             Settings
                             </a>
                         </li>
+                        <li>
+                            <a 
+                               asp-controller="Design" asp-action="StaticPlot">
+                            temp Design
+                            </a>
+                        </li>                        
                     </ul>
                 </div>
             </div>
@@ -39,10 +45,12 @@
         @RenderBody()
     </div>
 
+    <script src="~/lib/jQuery/dist/jquery.min.js"> </script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     
     
     @*Allow for local page script imports*@
-    @RenderSection("Scrips", false);
+    @RenderSection("Scripts", false);
+    
 </body>
 </html>

@@ -1,0 +1,95 @@
+using System;
+using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Infrastructure;
+using Microsoft.Data.Entity.Metadata;
+using Microsoft.Data.Entity.Migrations;
+using SensorNetwork.Models.DbContexts;
+
+namespace SensorNetwork.Models.Migrations
+{
+    [DbContext(typeof(SensorNetContext))]
+    [Migration("20160413101840_SensorNetworkDB")]
+    partial class SensorNetworkDB
+    {
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348");
+
+            modelBuilder.Entity("SensorNetwork.Models.Entities.Network", b =>
+                {
+                    b.Property<int>("NetworkId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Host")
+                        .HasAnnotation("Relational:ColumnType", "varchar(50)");
+
+                    b.Property<string>("NetworkName")
+                        .HasAnnotation("Relational:ColumnType", "varchar(45)");
+
+                    b.Property<string>("Password")
+                        .HasAnnotation("Relational:ColumnType", "varchar(16)");
+
+                    b.HasKey("NetworkId");
+
+                    b.HasAnnotation("Npgsql:TableName", "Network");
+                });
+
+            modelBuilder.Entity("SensorNetwork.Models.Entities.Reading", b =>
+                {
+                    b.Property<long>("ReadingID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Relational:ColumnType", "bigint");
+
+                    b.Property<int>("SensorId");
+
+                    b.Property<DateTime>("Time");
+
+                    b.Property<int>("Value");
+
+                    b.HasKey("ReadingID");
+
+                    b.HasAnnotation("Npgsql:TableName", "Readings");
+                });
+
+            modelBuilder.Entity("SensorNetwork.Models.Entities.Sensor", b =>
+                {
+                    b.Property<int>("SensorId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("IP")
+                        .HasAnnotation("Relational:ColumnType", "bigint");
+
+                    b.Property<string>("InFolder")
+                        .HasAnnotation("Relational:ColumnType", "varchar(25)");
+
+                    b.Property<int>("NetworkId");
+
+                    b.Property<int>("SensorType");
+
+                    b.Property<string>("Tag")
+                        .HasAnnotation("Relational:ColumnType", "varchar(25)");
+
+                    b.HasKey("SensorId");
+
+                    b.HasIndex("InFolder");
+
+                    b.HasAnnotation("Npgsql:TableName", "Sensors");
+                });
+
+            modelBuilder.Entity("SensorNetwork.Models.Entities.Reading", b =>
+                {
+                    b.HasOne("SensorNetwork.Models.Entities.Sensor")
+                        .WithMany()
+                        .HasForeignKey("SensorId");
+                });
+
+            modelBuilder.Entity("SensorNetwork.Models.Entities.Sensor", b =>
+                {
+                    b.HasOne("SensorNetwork.Models.Entities.Network")
+                        .WithMany()
+                        .HasForeignKey("NetworkId");
+                });
+        }
+    }
+}

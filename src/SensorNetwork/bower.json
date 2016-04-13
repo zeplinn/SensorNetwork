@@ -3,7 +3,10 @@
 	"private": true,
   "dependencies": {
     "bootstrap": "~3.3.6",
-    "jquery": "~2.2.2"
-
+    "ionicons-min": "~2.0.1",
+    "jquery": "~2.2.2",
+    "jquery-flot": "~0.8.3",
+    "jquery-ui-slider": "*",
+    "jquery-ui-slider-pips": "~1.11.3"
   }
 }
