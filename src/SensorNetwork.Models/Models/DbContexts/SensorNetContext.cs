@@ -23,7 +23,7 @@ namespace SensorNetwork.Models.DbContexts
         {
 #if DEBUG
             //var connect = Startup._builder["Data:DbConnectDebug"];
-            optBuilder.UseNpgsql("Host=localhost;Database=Debug;Username=postgres;Password=Z110144ucc");
+            optBuilder.UseNpgsql("Host=localhost;Database=Debug;Username=db;Password=1234");
             base.OnConfiguring(optBuilder);
 #endif
         }
