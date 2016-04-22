@@ -10,92 +10,112 @@
     ViewBag.Title = "Sensor Network";
 
 }
+@section Header{
+
+}
 @section Scripts{
     <script type="text/javascript" src="~/lib/jquery-flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-flot/jquery.flot.resize.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-flot/jquery.flot.selection.js"></script>
     <script type="text/javascript" src="~/lib/jquery-flot/jquery.flot.time.js"></script>
     <script type="text/javascript" src="~/lib/jquery-ui-slider/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="~/lib/jquery-ui-slider-pips/dist/jquery-ui-slider-pips.min.js"~></script>
+    <script type="text/javascript" src="~/lib/jquery-ui-slider-pips/dist/jquery-ui-slider-pips.min.js" ~></script>
     <script type="text/javascript" src="~/js/selection.plot.js"></script>
+    <script type="text/javascript" src="~/js/jrj-tabs.js"></script>
+    <script type="text/javascript">
+        $(function () {            
+            $("#tabs").jrjTabs("init", {
+                add: function (obj) {
+                    $("#temp-plot-container").append('<div></div>').selectionPlot();
+                    return { key: "", data: $("#temp-plot-container").detach(), select: true }
+                }
 
-    @*<script type="text/javascript" src="~/js/app-sidebar.js"></script>
-        <script type="text/javascript" src="~/js/sidebarcontroller.js"></script>*@
-    <script type="text/javascript" src="~/js/GraphUpdater.js"></script>
+            }).jrjTabs("add").jrjTabs("add");
+            $("#temp-plot-container").hide()
+            $(".jrj-tab-bar li a").on("click", function () {
+                var curSelection = $(this).closest(".jrj-tab-bar").children(".selected");
+                var li = $(this).closest("li").attr("class", "selected");
+                curSelection.attr("class", "");
+            })
+            //$(".jrj-tab-selector a").append('<div></div',$.selectionPlot())
+        });
+    </script>
 
     <script>
         $(function () {
-            $("#bonanza").selectionPlot();
-            $('.sidebar-element').on('click', function () {
+            $("#sensor-plot-net-1").selectionPlot();
+            //$('.sidebar-element').on('click', function () {
+            //    var a = $(this).attr('data-panelid');
+            //    var netId = $(this).attr('data-networkid');
+            //    var p = { sensorId: a };
+            //    //$.post("api/graph", { "post":"ramadingdong" }, function (data) {
+            //    //    alert(data);
+            //    //});
+            //    $.ajax({
+            //        url: 'api/graph',
+            //        type: 'POST',
+            //        data: JSON.stringify(p),
+            //        contentType: "application/json",
+            //        datatype: "json",
+            //        success: function (result) {
+
+            //            var options = {
+            //                lines: {
+            //                    show: true
+            //                },
+            //                points: {
+            //                    show: false
+            //                },
+            //                xaxis: {
+            //                    mode: "time",
+            //                    tickSize: [30, "minute"],
+            //                    tickFormatter: function (t, axis) {
+
+            //                        var date = new Date(t);
+            //                        if (date.getHours() % 3 == 0 && date.getMinutes() == 0) {
+
+            //                            var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            //                            var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+
+
+            //                            return hours + ":" + minutes;
+            //                        } else {
+            //                            return "";
+            //                        }
+            //                    }
+            //                },
+            //                yaxis: {
+            //                    min: -20,
+            //                    max: 50,
+            //                    tickFormatter: function (v, axis) {
+            //                        return v;
+
+            //                    }
+
+            //                }
+            //            };
+            //            var re = [[[1, 2], [2, 8], [3, -1]]];
+
+            //            var rre = result;
+            //            $.plot($("#NetworkGraph"+netId), [rre], options);
+            //            //var val = result.values
+            //            //$.flot($('#plotter'),[val])
+            //            //var arr = $.map(result, function (el) { return el });
+
+            //        }
+            //    });
+            //});
+
+
+            $('.sidebar-root').on('click', function () {
                 var a = $(this).attr('data-panelid');
-                var netId = $(this).attr('data-networkid');
-                var p = { sensorId: a };
-                //$.post("api/graph", { "post":"ramadingdong" }, function (data) {
-                //    alert(data);
-                //});
-                $.ajax({
-                    url: 'api/graph',
-                    type: 'POST',
-                    data: JSON.stringify(p),
-                    contentType: "application/json",
-                    datatype: "json",
-                    success: function (result) {
 
-                        var options = {
-                            lines: {
-                                show: true
-                            },
-                            points: {
-                                show: false
-                            },
-                            xaxis: {
-                                mode: "time",
-                                tickSize: [30, "minute"],
-                                tickFormatter: function (t, axis) {
-
-                                    var date = new Date(t);
-                                    if (date.getHours() % 3 == 0 && date.getMinutes() == 0) {
-
-                                        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-                                        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-
-
-                                        return hours + ":" + minutes;
-                                    } else {
-                                        return "";
-                                    }
-                                }
-                            },
-                            yaxis: {
-                                min: -20,
-                                max: 50,
-                                tickFormatter: function (v, axis) {
-                                    return v;
-
-                                }
-
-                            }
-                        };
-                        var re = [[[1, 2], [2, 8], [3, -1]]];
-
-                        var rre = result;
-                        $.plot($("#NetworkGraph"+netId), [rre], options);
-                        //var val = result.values
-                        //$.flot($('#plotter'),[val])
-                        //var arr = $.map(result, function (el) { return el });
-
-                    }
-                });
+                $('#' + a).toggle();
             });
 
-
-                $('.sidebar-root').on('click', function () {
-                    var a = $(this).attr('data-panelid');
-
-                    $('#' + a).toggle();
-                });
-
-            });
-            $("#chartupdater").on("load", function () {
-                liveChart("#chartupdater");
+        });
+        $("#chartupdater").on("load", function () {
+            liveChart("#chartupdater");
 
         });
     </script>
@@ -112,11 +132,34 @@
                 }
             </div>
         </div>
+        <div class="col-xs-12">
 
-        <div class="c-green col-md-10">
-            
-            <div id="myupdater" class="col-md-9" style="height:300px"></div>
+            <ul class="jrj-tab-bar">
+                <li class="selected">
+                    <h4 class="jrj-tab-selector">
+                        <a>btn</a>
+                        <i class="icon ion-android-close"></i>
+                    </h4>
+                </li>
+                <li data-panelid="2">
+                    <h4 class="jrj-tab-selector">
+                        <a>btn2</a>
+                        <i class="icon ion-android-close"></i>
+                    </h4>
+                </li>
+                <li>
+                    <h4 class="jrj-tab-selector">
+                        <a>btn3</a>
+                        <i class="icon ion-android-close"></i>
+                    </h4>
+                </li>
+            </ul>
+            <div class="jrj-tab-body">
+
+            </div>
         </div>
-        <div id="bonanza" style="height:400px"></div>
+        <div id="tabs"></div>
     </div>
 </div>
+<div id="temp-plot-container"></div>
+

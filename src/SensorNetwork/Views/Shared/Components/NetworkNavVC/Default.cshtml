@@ -26,6 +26,7 @@
         </div>
     </div>*@
 <div class="panel panel-default">
+
     <div class="panel-heading" role="tab" id="@($"NetworkHeading{Model.Network.NetworkId}")">
         <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="@($"{Model.DataParent}")"
@@ -35,19 +36,25 @@
             </a>
         </h4>
     </div>
+
     <div id="@($"NetworkCollapse{Model.Network.NetworkId}")"
          class="panel-collapse collapse" role="tabpanel"
          aria-labelledby="@($"NetworkHeading{Model.Network.NetworkId}")">
         <div class="panel-body">
-            <div class="list-group-item-info col-xs-12 col-lg-1">
+
+            <div class="list-group-item-info col-xs-12 col-sm-2">
                 @foreach (var sensor in Model.Network.Sensors)
                 {
-                    @Component.Invoke(nameof(SensorNetwork.Views.Shared.Components.SensorNavVC.SensorNavVC), sensor,Model.Network.NetworkId)
+                    @Component.Invoke(nameof(SensorNetwork.Views.Shared.Components.SensorNavVC.SensorNavVC), sensor, Model.Network.NetworkId)
                 }
+                
             </div>
-            <div id="@($"NetworkGraph{Model.Network.NetworkId}")" class="col-xs-12 col-lg-10" style="height:300px"></div>
+
+            <div id="@($"sensor-plot-net-{Model.Network.NetworkId}")" class="sensor-plot col-xs-12 col-md-10"></div>
+            @*<div id="@($"NetworkGraph{Model.Network.NetworkId}")" class="col-xs-12 col-lg-10" style="height:300px"></div>*@
         </div>
     </div>
+
 </div>
 
 
