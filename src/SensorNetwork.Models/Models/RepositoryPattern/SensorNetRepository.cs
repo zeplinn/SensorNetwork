@@ -23,7 +23,7 @@ namespace SensorNetwork.Models.RepositoryPattern
         {
             try
             {
-                return _context.Networks.OrderBy(t => t.NetworkName);
+                return _context.Networks.OrderBy(t => t.Name);
             }
             catch (Exception e)
             {
@@ -32,14 +32,14 @@ namespace SensorNetwork.Models.RepositoryPattern
             }
         }
        
-        public IEnumerable<TResult> GetAllNetworksWithSensors<TResult>( Expression<Func<Network, Sensor, TResult>> resultSelector)
+        public IEnumerable<TResult> GetAllNetworksWithSensors<TResult>( Expression<Func<Network, TResult>> networkSelector)
         {
             try
             {
-                var a = _context
-                    .Networks
-                    .Include(n => n.Sensors)
-                    .OrderBy(n => n.NetworkName).SelectMany(n=>n.Sensors,resultSelector).ToList();
+                var a =
+                    _context.Networks
+                    .Include(n=>n.Sensors)
+                        .Select(networkSelector);
                 return a;
                // SelectMany(n => n.Sensors, (n, s) => new { netId = n.NetworkId, sensor = new { senId = s.SensorId, SensorTag = s.Tag } });
             }
@@ -55,7 +55,7 @@ namespace SensorNetwork.Models.RepositoryPattern
                 var a = _context
                     .Networks
                     .Include(n => n.Sensors)
-                    .OrderBy(n => n.NetworkName).ToList();
+                    .OrderBy(n => n.Name).ToList();
                 return a;
                 // SelectMany(n => n.Sensors, (n, s) => new { netId = n.NetworkId, sensor = new { senId = s.SensorId, SensorTag = s.Tag } });
             }
@@ -73,11 +73,11 @@ namespace SensorNetwork.Models.RepositoryPattern
 
         public IEnumerable<Reading> GetReadings(Sensor sensor)
         {            
-            return _context.Readings.Where(r=>r.SensorId==sensor.SensorId).ToList();
+            return _context.Readings.Where(r=>r.Sensor.Id==sensor.Id).ToList();
         }
         public IEnumerable<TResult> GetReadings<TResult>(Sensor sensor, Expression<Func<Reading,TResult>> select)
         {
-            return _context.Readings.Where(r => r.SensorId == sensor.SensorId).OrderBy(r => r.Time).Select(select).ToList();
+            return _context.Readings.Where(r => r.Sensor.Id == sensor.Id).OrderBy(r => r.Time).Select(select).ToList();
         }
         
     }

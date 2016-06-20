@@ -19,7 +19,7 @@
     <script type="text/javascript" src="~/lib/jquery-flot/jquery.flot.selection.js"></script>
     <script type="text/javascript" src="~/lib/jquery-flot/jquery.flot.time.js"></script>
     <script type="text/javascript" src="~/lib/jquery-ui-slider/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="~/lib/jquery-ui-slider-pips/dist/jquery-ui-slider-pips.min.js" ~></script>
+    <script type="text/javascript" src="~/lib/jquery-ui-slider-pips/dist/jquery-ui-slider-pips.min.js"></script>
     <script type="text/javascript" src="~/js/selection.plot.js"></script>
     <script type="text/javascript" src="~/js/jrj-tabs.js"></script>
     <script type="text/javascript">
@@ -32,11 +32,13 @@
 
             }).jrjTabs("add").jrjTabs("add");
             $("#temp-plot-container").hide()
-            $(".jrj-tab-bar li a").on("click", function () {
-                var curSelection = $(this).closest(".jrj-tab-bar").children(".selected");
-                var li = $(this).closest("li").attr("class", "selected");
-                curSelection.attr("class", "");
-            })
+            $(".jrj-tab-bar li a")
+                .on("click",
+                    function () {
+                        var curSelection = $(this).closest(".jrj-tab-bar").children(".selected");
+                        var li = $(this).closest("li").attr("class", "selected");
+                        curSelection.attr("class", "");
+                    });
             //$(".jrj-tab-selector a").append('<div></div',$.selectionPlot())
         });
     </script>
@@ -122,9 +124,9 @@
 }
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 col-xs-offset-1">
+        <div class="col-xs-12">
 
-            <div class="panel-group" id="NetworkAccordion" role="tablist" aria-multiselectable="true">
+            <div class="panel-group" id="NetworkAccordion" role="tablist" aria-multiselectable="false">
                 @foreach (var network in Model.Networks)
                 {
 
@@ -132,34 +134,8 @@
                 }
             </div>
         </div>
-        <div class="col-xs-12">
-
-            <ul class="jrj-tab-bar">
-                <li class="selected">
-                    <h4 class="jrj-tab-selector">
-                        <a>btn</a>
-                        <i class="icon ion-android-close"></i>
-                    </h4>
-                </li>
-                <li data-panelid="2">
-                    <h4 class="jrj-tab-selector">
-                        <a>btn2</a>
-                        <i class="icon ion-android-close"></i>
-                    </h4>
-                </li>
-                <li>
-                    <h4 class="jrj-tab-selector">
-                        <a>btn3</a>
-                        <i class="icon ion-android-close"></i>
-                    </h4>
-                </li>
-            </ul>
-            <div class="jrj-tab-body">
-
-            </div>
-        </div>
-        <div id="tabs"></div>
+        
     </div>
 </div>
-<div id="temp-plot-container"></div>
+@*<div id="temp-plot-container"></div>*@
 

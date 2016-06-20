@@ -1,0 +1,111 @@
+h1 {
+  margin: 0;
+  cursor: pointer;
+}
+#tab {
+  height: 500px;
+  background: grey;
+}
+.jrj-tab-bar {
+  position: relative;
+  bottom: -1px;
+  margin: 0;
+  padding: 0;
+  height: 30px;
+  display: flex;
+  overflow: hidden;
+}
+.jrj-tab-bar .jrj-tab-selectors {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  width: 100%;
+  margin: 0 5px;
+  padding: 0px;
+}
+.jrj-tab-bar .jrj-tab-selector {
+  flex: 1 0 0;
+  max-width: 100px;
+  cursor: pointer;
+  border: 1px solid grey;
+  border-color: lightgray;
+  border-bottom: 1px solid grey;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: -2px 0 2px lightgrey;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.jrj-tab-bar .jrj-tab-selector > div:last-of-type {
+  width: 30px;
+  margin: 0;
+  padding: 0;
+}
+.jrj-tab-bar .jrj-tab-selector > div:last-of-type i {
+  display: none;
+}
+.jrj-tab-bar .jrj-tab-selector > div:first-of-type {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.jrj-tab-bar .jrj-tab-selector > div:first-of-type > a,
+.jrj-tab-bar .jrj-tab-selector > div:first-of-type > a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: red;
+  line-height: 30px;
+  text-align: center;
+  align-self: middle;
+}
+.jrj-tab-bar .jrj-tab-selector.jrj-selected {
+  margin: 0;
+  padding: 0;
+  min-width: 100px;
+  max-width: auto;
+  border: 1px solid black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid white;
+  box-shadow: -2px 0 2px lightgrey;
+  position: relative;
+  z-index: 5;
+  background: white;
+  flex: 0 0 auto;
+}
+.jrj-tab-bar .jrj-tab-selector.jrj-selected > div > i {
+  display: block;
+  cursor: pointer;
+  content: url(cross.svg);
+  width: 10px;
+  margin: 10px 5px;
+}
+.jrj-tab-bar .jrj-tab-selector.jrj-selected > div > i:hover {
+  width: 12px;
+  margin: 9px 4px;
+}
+.jrj-tab-body {
+  box-shadow: -2px 0 2px lightgrey;
+  padding: 2px;
+  border-top-left-radius: 5px;
+  border: 1px solid grey;
+  width: 100%;
+  min-height: 100px;
+  height: 100%;
+  background: white;
+}
+.jrj-tab-body > div {
+  display: none;
+  height: 100%;
+  width: 100%
+        green;
+}
+.jrj-tab-body > div.jrj-selected {
+  display: block;
+  height: 100%;
+}

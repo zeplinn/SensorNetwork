@@ -31,13 +31,12 @@ namespace SensorNetwork.Controllers.App
             
             return View(_vm);
         }
-        //[HttpPost]
-        //public IActionResult Home([FromBody]PostViewModel vm)
-        //{
-        //    return RedirectToAction("/",vm);
-        //    //return ViewComponent(nameof(Diagram),_vm);
-        //}
 
+        //public JsonResult FetechNetworkWithSensors()
+        //{
+        //    var s = _snRepo.GetAllNetworksWithSensors
+        //    return new JsonResult()
+        //}
         public IActionResult Settings()
         {
             return View();

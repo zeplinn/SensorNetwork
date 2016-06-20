@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "SensorNetwork.RaspianDriver Console Application",
   "authors": [ "JesperRytter" ],
@@ -11,6 +11,8 @@
   },
 
   "dependencies": {
+    "Microsoft.CSharp": "4.0.0",
+    "System.Linq": "4.0.0"
   },
 
   "commands": {
@@ -24,8 +26,7 @@
         "System.Collections": "4.0.11-beta-23516",
         "System.Console": "4.0.0-beta-23516",
         "System.Linq": "4.0.1-beta-23516",
-        "System.Threading": "4.0.11-beta-23516",
-        "Npgsql": "3.1.0-alpha6"
+        "System.Threading": "4.0.11-beta-23516"
 
       }
     }

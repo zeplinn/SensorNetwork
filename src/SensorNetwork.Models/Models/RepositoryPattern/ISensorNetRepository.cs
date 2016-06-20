@@ -9,7 +9,7 @@ namespace SensorNetwork.Models.RepositoryPattern
     {
         IEnumerable<Network> GetAllNetWork();
         IEnumerable<Network> GetAllNetworksWithSensors();
-        IEnumerable<TResult> GetAllNetworksWithSensors<TResult>(Expression<Func<Network, Sensor, TResult>> resultSelector);
+        IEnumerable<TResult> GetAllNetworksWithSensors<TResult>(Expression<Func<Network, TResult>> resultSelector);
         IEnumerable<Reading> GetReadings(Sensor sensor);
         IEnumerable<TResult> GetReadings<TResult>(Sensor sensor, Expression<Func<Reading, TResult>> select);
         int ReadingsCount();

@@ -1,0 +1,60 @@
+#net {
+  min-height: 400px;
+}
+.sensors {
+  padding: 30px 0;
+  height: 100%;
+}
+.sensors > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+.sensors > div > a {
+  flex: 1 0 0;
+}
+.jrj-network .jrj-panel {
+  width: 100%;
+  min-height: 10px;
+  height: 100%;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  box-shadow: 3px 3px 8px #c6c6c6;
+}
+.jrj-network .jrj-panel-heading {
+  display: flex;
+  min-height: 10px;
+  max-height: 30px;
+  padding: 3px;
+  border-bottom: 1px solid #b3b3b3;
+  background: #b3b3b3;
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.jrj-network .jrj-panel-heading > .jrj-title {
+  cursor: pointer;
+}
+.jrj-network .jrj-panel-heading > .jrj-icon {
+  cursor: pointer;
+  max-width: 12px;
+  flex: 1 0 12px;
+  display: block;
+  content: url(cross.svg);
+}
+.jrj-network .jrj-panel-heading > .jrj-panel-bar {
+  flex: 1 0 0;
+  width: 100%;
+}
+.jrj-network .jrj-panel-body {
+  padding: 2px;
+  border: 1px solid #b3b3b3;
+  border-top: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  min-height: 12px;
+  height: 300px;
+  width: 100%;
+  background: white;
+}

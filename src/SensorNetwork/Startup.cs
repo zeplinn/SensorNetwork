@@ -18,7 +18,7 @@ namespace SensorNetwork
 {
     public class Startup
     {
-        public static IConfigurationRoot _builder;
+        private readonly IConfigurationRoot _builder;
         public Startup(IApplicationEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -31,7 +31,6 @@ namespace SensorNetwork
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddInstance<IConfigurationRoot>(_builder);
             services.AddMvc()
                 .AddJsonOptions(opt=> {
                     // deals with javascript lowercase and c# uppercase property conventions when posting
@@ -40,12 +39,28 @@ namespace SensorNetwork
             services.AddEntityFramework()
                 .AddNpgsql()
                 .AddDbContext<SensorNetContext>();
+#if DEBUG
             services.AddTransient<SeedNetwork>();
+#endif
+            services.AddScoped(provider=>  _builder);
             services.AddScoped<ISensorNetRepository, SensorNetRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app,SeedNetwork seed)
+#if DEBUG
+        public void Configure(IApplicationBuilder app, SeedNetwork seed)
+        {
+            ConfigApp(app);
+            seed.ensureSeedData();
+
+        }
+#elif RELEASE
+        public void Configure(IApplicationBuilder app)
+        {
+            ConfigApp(app);
+        }
+#endif
+        private void ConfigApp(IApplicationBuilder app)
         {
             app.UseStaticFiles();
             app.UseMvc(config =>
@@ -55,10 +70,6 @@ namespace SensorNetwork
                     template: "{controller}/{action}/{id?}",
                     defaults: new { controller = AppController.C, action = AppController.AHome });
             });
-
-#if DEBUG
-            seed.ensureSeedData();
-#endif
         }
 
         // Entry point for the application.

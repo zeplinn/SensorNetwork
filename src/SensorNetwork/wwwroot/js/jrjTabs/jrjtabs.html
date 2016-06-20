@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jrjTabs</title>
+
+    <!--Depndencies-->
+    
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+<!-- Latest compiled and minified JavaScript -->
+    
+    <!--Fiddle-->
+    <link rel="stylesheet" href="jrjTabs.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>succes</h1>
+            <div id="tabs" class="col-xs-12"></div>
+        </div>
+    </div>
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>    
+    <script type="text/javascript" src="jrjTabs.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var tabs=$.jrjTabs("#tabs");
+            $("h1").on("click",function(){
+                tabs.addTab("rolo",function(tab,body){
+                    body.append("<h1>Hej med Dig</h1>");
+                });
+            });
+            
+        });
+    </script>
+    
+</body>
+</html>

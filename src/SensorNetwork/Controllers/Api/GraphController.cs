@@ -23,14 +23,14 @@ namespace SensorNetwork.Controllers.Api
             _repo = repo;
         }
         // GET: /<controller>/
-        [HttpPost("")]
+        [HttpPost("post")]
         public  JsonResult Post([FromBody]Sensor sensor)
         {
             var valuepairs= _repo.GetReadings(sensor, r => new object[] { r.Time.TimeOfDay.TotalMilliseconds, r.Value });
             
             return new JsonResult(valuepairs);
         }
-        [HttpGet("/update")]
+        [HttpGet("update")]
         public JsonResult Update()
         {
             var cpu = _rnd.Next(0, 100);
@@ -40,6 +40,19 @@ namespace SensorNetwork.Controllers.Api
                 Core = cpu - 30 < 0 ? 0 : _rnd.Next(0, cpu - 30),
                 Disk = _rnd.Next(56, 1024)
             });
+        }
+
+        [HttpGet("networksWithSensors")]
+        public JsonResult NetworksWithSensors()
+        {
+            //var values = _repo.GetAllNetWork();
+            var net= _repo.GetAllNetworksWithSensors(n=> new
+            {
+                n.Id
+                , n.Name
+                , Sensors=n.Sensors.Select(s=> new {s.Id, s.Tag})
+            });
+            return new JsonResult(net);
         }
     }
 }

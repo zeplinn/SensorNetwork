@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jrjTabs</title>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="../../lib/bootstrap/dist/css/bootstrap.min.css">  
+    <!--Fiddle-->
+    <link rel="stylesheet" href="jrjNetwork.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>succes</h1>
+            <div id="net" class="col-xs-12"></div>
+        </div>
+    </div>
+    
+    <script src="../../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../../lib/bootstrap/dist/js/bootstrap.min.js"></script>  
+    <script type="text/javascript" src="jrjNetwork.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            
+            
+            
+            var network = $("#net").jrjNetwork();
+            
+            $("h1").on("click",function(){
+                var f= $(".jrj-panel-1")
+                alert(network.getPanelById(1));
+                network.remove(".jrj-panel-1",function(b,h){
+                    alert(b.attr("class"));
+                })
+            })
+            
+            network.add("super",null,function(_,body,heading){
+                body.append("<a>woot</a>");
+            });
+            network.add("bums",null,function(_,body,heading){
+                body.append("<a>supp</a>");
+            });
+            network.add("bums",null,function(_,body,heading){
+                body.append("<a>supp</a>");
+            });
+            network.add("bums",null,function(_,body,heading){
+                body.append("<a>supp</a>");
+            });
+            
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,29 +1,34 @@
 ﻿using System.Data.Common;
 using Microsoft.Data.Entity;
+using Microsoft.Extensions.Configuration;
 using SensorNetwork.Models.Entities;
 
 namespace SensorNetwork.Models.DbContexts
 {
     public class SensorNetContext : DbContext
     {
-        //private IConfigurationRoot _configRoot;
+        private IConfigurationRoot _configRoot;
 
         
         public DbSet<Reading> Readings { get; set; }
         public DbSet<Network> Networks { get; set; }
         public DbSet<Sensor> Sensors { get; set; }
 
-        //public SensorNetContext(IConfigurationRoot configRoot)
-        //{
-        //    _configRoot = configRoot;
-        //    Database.EnsureCreated();
-        //}
+        public SensorNetContext(IConfigurationRoot configRoot)
+        {
+            _configRoot = configRoot;
+            Database.EnsureCreated();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optBuilder)
         {
 #if DEBUG
-            //var connect = Startup._builder["Data:DbConnectDebug"];
-            optBuilder.UseNpgsql("Host=localhost;Database=Debug;Username=db;Password=1234");
+            var connect = _configRoot["Data:DbConnectDebug"];
+            optBuilder.UseNpgsql(connect);
+            base.OnConfiguring(optBuilder);
+#elif RELEASE
+            var connect = _configRoot["Data:DbConnect"];
+            optBuilder.UseNpgsql(connect);
             base.OnConfiguring(optBuilder);
 #endif
         }
@@ -32,26 +37,26 @@ namespace SensorNetwork.Models.DbContexts
             builder.Entity<Network>(e =>
             {
                 e.ForNpgsqlToTable("Network");
-                e.HasKey(key => new { key.NetworkId });
-                e.Property(n => n.NetworkId).ValueGeneratedOnAdd();
+                e.HasKey(key => new { key.Id });
+                e.Property(n => n.Id).ValueGeneratedOnAdd();
             });
 
             builder.Entity<Sensor>(e =>
             {
                 e.ForNpgsqlToTable("Sensors");
-                e.HasKey(key => new { key.SensorId });
+                e.HasKey(key => new { key.Id });
                 e.HasOne(s => s.Network).WithMany(n => n.Sensors);
-                e.Property(s => s.SensorId).ValueGeneratedOnAdd();
-                e.HasIndex(s => s.InFolder);
+                e.Property(s => s.Id).ValueGeneratedOnAdd();
+                
             });
 
             builder.Entity<Reading>(e =>
             {
-                e.ForNpgsqlToTable("Readings");
-                e.Property(r => r.ReadingID).ValueGeneratedOnAdd();
-                e.HasOne(r => r.Sensor).WithMany(s => s.Readings);//.HasForeignKey(r => r.SensorId);
+                e.ForNpgsqlToTable("Readings");                
+                e.HasKey(r => new { r.Time, r.SensorId});
+                //e.Property(r => r.ReadingID).ValueGeneratedOnAdd();
+                e.HasOne(r => r.Sensor).WithMany(s => s.Readings).HasForeignKey(r => r.SensorId);
             });
-
             base.OnModelCreating(builder);
         }
     }

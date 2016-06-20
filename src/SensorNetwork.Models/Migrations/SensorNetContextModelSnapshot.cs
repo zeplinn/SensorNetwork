@@ -17,61 +17,52 @@ namespace SensorNetwork.Models.Migrations
 
             modelBuilder.Entity("SensorNetwork.Models.Entities.Network", b =>
                 {
-                    b.Property<int>("NetworkId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Host")
                         .HasAnnotation("Relational:ColumnType", "varchar(50)");
 
-                    b.Property<string>("NetworkName")
+                    b.Property<string>("Name")
                         .HasAnnotation("Relational:ColumnType", "varchar(45)");
 
                     b.Property<string>("Password")
                         .HasAnnotation("Relational:ColumnType", "varchar(16)");
 
-                    b.HasKey("NetworkId");
+                    b.HasKey("Id");
 
                     b.HasAnnotation("Npgsql:TableName", "Network");
                 });
 
             modelBuilder.Entity("SensorNetwork.Models.Entities.Reading", b =>
                 {
-                    b.Property<long>("ReadingID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Relational:ColumnType", "bigint");
+                    b.Property<DateTime>("Time");
 
                     b.Property<int>("SensorId");
 
-                    b.Property<DateTime>("Time");
-
                     b.Property<int>("Value");
 
-                    b.HasKey("ReadingID");
+                    b.HasKey("Time", "SensorId");
 
                     b.HasAnnotation("Npgsql:TableName", "Readings");
                 });
 
             modelBuilder.Entity("SensorNetwork.Models.Entities.Sensor", b =>
                 {
-                    b.Property<int>("SensorId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<long>("IP")
                         .HasAnnotation("Relational:ColumnType", "bigint");
 
-                    b.Property<string>("InFolder")
-                        .HasAnnotation("Relational:ColumnType", "varchar(25)");
-
-                    b.Property<int>("NetworkId");
-
-                    b.Property<int>("SensorType");
+                    b.Property<int?>("NetworkId");
 
                     b.Property<string>("Tag")
                         .HasAnnotation("Relational:ColumnType", "varchar(25)");
 
-                    b.HasKey("SensorId");
+                    b.Property<int>("Type");
 
-                    b.HasIndex("InFolder");
+                    b.HasKey("Id");
 
                     b.HasAnnotation("Npgsql:TableName", "Sensors");
                 });

@@ -1,0 +1,82 @@
+@panel-color : lighten(grey,20);
+@panel-shadow: 3px 3px 8px darken(lightgrey,5);
+@panel-border: 1px solid @panel-color;
+
+#net{
+    min-height: 400px;
+}
+.sensors{
+    padding: 30px 0;
+    
+    height: 100%;
+    >div{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+
+        >a{
+            flex: 1 0 0;
+        }
+    }
+}
+.jrj-network{
+    
+    @BgBody:white;
+    @border: 1px solid @panel-color;
+    @borderRadius:4px ;
+    @len100:100%;
+    
+    .jrj-panel{
+        width: @len100;
+        min-height: 10px;
+        height: 100%;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        box-shadow: @panel-shadow;
+    }
+    .jrj-panel-heading{
+        display: flex;
+        min-height: 10px;
+        max-height: 30px;
+        padding: 3px;
+        border-bottom: @border;
+        background: @panel-color;
+        width: @len100;
+        // border: @border;
+        border-top-left-radius: @borderRadius;
+        border-top-right-radius: @borderRadius;
+        
+        >.jrj-title{
+            cursor: pointer;
+        }
+        >.jrj-icon{
+            cursor: pointer;
+            max-width: 12px;
+            flex: 1 0 12px;
+            display: block;
+            // float: right;
+            content: url(cross.svg);
+        }
+        >.jrj-panel-bar{
+            flex: 1 0 0;
+            width: 100%;
+        }
+        
+    }
+    
+    
+    .jrj-panel-body{
+        padding: 2px;
+        border: @border;
+        border-top: 0;
+        border-bottom-left-radius: @borderRadius;
+        border-bottom-right-radius: @borderRadius;
+        min-height: 12px;
+        height: 300px;
+        width: @len100;
+        background: @BgBody;
+        
+    }
+    
+}

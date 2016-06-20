@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>jrjTabs</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+	<!--Fiddle-->
+	<link rel="stylesheet" href="jrjNetwork/jrjNetwork.css" />
+	<link rel="stylesheet" href="jrjTabs/jrjTabs.css" />
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<h1>succes</h1>
+			<div id="net" class="col-xs-12"></div>
+		</div>
+	</div>
+
+	<script src="../lib/jquery/dist/jquery.min.js"></script>
+	<script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="jrjNetwork/jrjNetwork.js"></script>
+	<script type="text/javascript" src="jrjTabs/jrjTabs.js"></script>
+	<script type="text/javascript" src="selection.plot.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            
+            
+            var networks = $.jrjNetwork("#net");
+            
+            // $("h1").on("click",function(){
+            //     var f= $(".jrj-panel-1")
+            //     network.remove(".jrj-panel-1",function(b,h){
+            //     })
+            // })
+
+			function onAddNetwork(network,body,heading){
+                var $panelid = $(heading).closest("jrj-panel").attr("panelid");
+                body.append(`<div class="sensors col-xs-2">
+								<div></div>
+							</div> 
+							<div class="graphs col-xs-10" style="height:400;"></div>`);
+                
+                var $tabs = $(body.children(".graphs")).jrjTabs(),
+				//because flex and margin/padding work very poorly together one the same element. 
+				//an ekstra container is needed for the sensors
+                    $sensors = $(body.children(".sensors").children()),
+                    plots ={};  
+				for(sensor in network.sensors){
+					$sensors.append(`<a data-sensorid ="${sensor.id}" data-networkid="${network.id}"> ${sensor.tag} </a>`);
+				}
+				//any child <a> of $sensors share a click event
+				$sensors.on("click","a",function(){
+						var $id = $(this).attr("sensorid");
+						alert("click performed");
+						
+                    	$tabs.addTab("some tabName",{id}, onAddTab)
+			});       
+
+        	}
+
+			//fetch readings from server, create plot and attach to tab
+			function onAddTab(data,h,b){
+                        if(plots[$id]===undefined){
+
+							$.ajax({
+								url: 'api/graph', // <---- change to correct link for fetching data
+								type: 'POST',
+								data: JSON.stringify(p),
+								contentType: "application/json",
+								datatype: "json",
+								success: function (result) {
+
+									var plot = $.selectionPlot(b,[result]);
+									plots[$id]=plot;
+
+								}
+							});
+						}
+					}
+            
+			
+			// var g = [1,2,3,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+            // networks.add("super",g, function (network ,body, heading){
+            //     var $panelid = $(heading).closest("jrj-panel").attr("panelid");
+            //     body.append(`<div class="sensors col-xs-2">
+			// 					<div></div>
+			// 				</div> 
+			// 				<div class="graphs col-xs-10" style="height:400;"></div>`);
+                
+            //     var $tabs = $(body.children(".graphs")).jrjTabs(),
+			// 	//because flex and margin/padding work very poorly together one the same element. 
+			// 	//an ekstra container is needed for the sensors
+            //         $sensors = $(body.children(".sensors").children()),
+            //         plots ={};  
+			// 	for(sensor in network.sensors){
+			// 		$sensors.append(`<a data-sensorid ="${sensor.id}" data-networkid="${network.id}"> ${sensor.tag} </a>`);
+			// 	}
+			// 	//any child <a> of $sensors share a click event
+			// 	$sensors.on("click","a",function(){
+			// 			var $id = $(this).attr("sensorid");
+			// 			alert("click performed");
+						
+            //         	$tabs.addTab("some tabName",{id}, onAddTab)
+			// });       
+
+        	// });
+            
+			function server(shorturl, send,result,callType="POST"){
+				$.ajax({
+					url: `api/${shorturl}`, // <---- change to correct link for fetching data
+					type: callType,
+					data: JSON.stringify(send),
+					contentType: "application/json",
+					datatype: "json",
+					success: result
+				});
+
+			}
+
+			// enable this part when added to the home screen
+			// server("graph/networksWithSensors",null,function(result){
+			// 	for( network in result){
+			// 		networks.add(network.name,network, new onAddNetwork)
+			// 	}
+			// },"GET");
+
+            
+        });
+    </script>
+
+</body>
+
+</html>

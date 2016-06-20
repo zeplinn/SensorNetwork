@@ -10,6 +10,7 @@ namespace SensorNetwork.Views.Shared.Components.NetworkNavVC
 {
     public class NetworkNavVC: ViewComponent
     {
+        //public Dictionary<int,SensorVM> CurrentReadings { get; set; }
         public async Task<IViewComponentResult> InvokeAsync(Network network, string dataParent)
         {
             var wait = await Task<NetworkNavVCModel>.Run(() => new NetworkNavVCModel() { Network = network, DataParent = dataParent });

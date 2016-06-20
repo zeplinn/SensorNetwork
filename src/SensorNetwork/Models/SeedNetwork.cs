@@ -28,7 +28,7 @@ namespace SensorNetwork.Models
                     {
                         //NetworkId = int.Parse( $"{item}"),
                         Host = $"localhost{item}",
-                        NetworkName = $"Network{item}",
+                        Name = $"Network{item}",
                         Password = $"xxxx{item}",
                         Sensors = new List<Sensor>(EnsureSensorSeed())
                     };
@@ -45,7 +45,7 @@ namespace SensorNetwork.Models
                 var s = new Sensor()
                 {
                     Tag = Enum.GetName(typeof(ESensor), i),
-                    SensorType = (ESensor)i,
+                    Type = (ESensor)i,
                     IP = 19216850 + i
                 };
                 s.Readings = new List<Reading>(EnsureReadingSeed());
